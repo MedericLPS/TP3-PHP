@@ -1,41 +1,54 @@
+<?php
+    var_dump($_POST);
+    // Connexion à la BDD 
+    include('../php/login-db.php');
+
+    // Ajout d'une promotion
+    if (isset($_POST['addPromotion'])) {
+        $promotionAdd = $db->prepare('INSERT INTO promotion (nom) VALUES (:nom)');
+        $promotionAdd->execute([':nom' => $_POST['addPromotion']]);
+    }
+
+    
+    // Suppression d'une promotion
+    if (isset($_POST['deletePromotion'])) {
+        $promotionDelete = $db->prepare('DELETE FROM promotion WHERE promotion.id =(:id)');
+        $promotionDelete->execute([':id' => $_POST['deletePromotion']]);
+    }
+    
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ajout d'une promotion</title>
+    <title>Gestion des promotions</title>
 </head>
 <body>
-    <h1>Ajout d'une promotion</h1>
+    <h1>Gestion des promotions</h1>
     <a href="../view/view-index.php">
         <input type="button" value="Retour">
     <a/>
     </br>
     <hr>
     </br>
-    <?php
-    
-    // Connexion à la BDD 
-    include('../php/login-db.php');
-    
-    ?>
     <form name="ADD PROMOTION" action="" method="post" enctype="multipart/form-data">   
         <div>
-            <label for="nom">Promotion </label> 
-            <input name="PromotionAdd" type ="text" id="PromotionAdd"/> 
+            <label>Promotion </label> 
+            <input name="addPromotion" type ="text"/> 
         </div>
         </br>
         <div>
-            <input type="submit" value="Ajouter" onclick="<?php
-            // A FAIRE: BOUTTON D'AJOUT D'UNE PROMOTION EN FONCTION D'UN NOM ENTRE (VERIFICATIONS A FAIRE ?)
-            $add = $db->exec('INSERT INTO promotion (id, nom) VALUES (NULL, BTS Z1)');
-            ?>"/>
+            <input type="submit" value="Ajouter"/>
         </div>
-    </br>
-    <hr>
-    </br>    
+        </br>
+        <hr>
+        </br>
+    </form>    
     <form name="DELETE PROMOTION" action="" method="post" enctype="multipart/form-data">   
     <div>
-    <label for="PromotionDelete">Promotion </label>
-                <select name=" "  id=" " required>
+    <label for="deletePromotion">Promotion </label>
+                <select name="deletePromotion"  id=" " required>
                 <?php 
                 // Liste déroulante des Promotions disponibles
                 $reponse = $db->query('SELECT * FROM promotion');
@@ -49,12 +62,7 @@
 		        </select>
         </br></br>   
         <div>
-            <input type="submit" value="Supprimer" onclick="<?php
-
-            // PARTIE A RE-ADAPTER PAR RAPPORT AUX AUTRES REQUETES
-            $delete = $db->query('DELETE * FROM promotion WHERE id=' . $donnees->quote($_GET['id']));
-            
-            ?>"/>
+            <input type="submit" value="Supprimer"/>
         </div>
         </br>
         <hr>
