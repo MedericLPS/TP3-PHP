@@ -8,8 +8,10 @@
         <h1>TP3 - Gestion de l'IIA</h1>
         <?php
 
+        // Connexion à la BDD 
         include('../php/login-db.php');
 
+        // Requete SQL récupérant toutes les promotions de la BDD afin de les stocker dans une variable
         $promotions = $db->query('SELECT * FROM promotion');
 
         echo 'Promotions: ';

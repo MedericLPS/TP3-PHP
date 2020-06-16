@@ -12,6 +12,7 @@
         </br></br>
         <?php
 
+        // Connexion à la BDD 
         include('../php/login-db.php');
 
         $etudiants = $db->query('SELECT * FROM etudiant WHERE promotion =' . $db->quote($_GET['id']) . ' ORDER BY nom ASC, prenom ASC');

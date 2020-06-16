@@ -11,6 +11,7 @@
     </br></br>
     <?php
     
+    // Connexion à la BDD 
     include('../php/login-db.php');
     
     ?>
