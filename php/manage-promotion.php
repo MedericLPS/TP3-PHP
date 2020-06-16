@@ -13,13 +13,13 @@
     </br>
     <?php
     
-    //CODE
+    include('../php/login-db.php');
     
     ?>
     <form name="ADD PROMOTION" action="" method="post" enctype="multipart/form-data">   
         <div>
-            <label for="nom">Promotion</label> 
-            <input name="Promotion" type ="text" id="Promotion"/> 
+            <label for="nom">Promotion </label> 
+            <input name="PromotionAdd" type ="text" id="PromotionAdd"/> 
         </div>
         </br>
         <div>
@@ -29,11 +29,19 @@
     <hr>
     </br>    
     <form name="DELETE PROMOTION" action="" method="post" enctype="multipart/form-data">   
-        <div>
-            <label for="nom">Promotion</label> 
-            <input name="Promotion" type ="text" id="Promotion"/> 
-        </div>
-        </br>   
+    <div>
+    <label for="PromotionDelete">Promotion </label>
+                <select name=" "  id=" " required>
+			    <?php $reponse = $db->query('SELECT * FROM promotion');
+                              while ($donnees = $reponse->fetch())
+									{
+				?>
+				<option value="<?php echo $donnees['id']; ?>"> 
+					<?php echo $donnees['nom']; ?>
+				</option>
+				<?php } ?>
+		        </select>
+        </br></br>   
         <div>
             <input type="submit" value="Supprimer"/>
         </div>
