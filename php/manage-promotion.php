@@ -24,7 +24,10 @@
         </div>
         </br>
         <div>
-            <input type="submit" value="Ajouter"/>
+            <input type="submit" value="Ajouter" onclick="<?php
+            // A FAIRE: BOUTTON D'AJOUT D'UNE PROMOTION EN FONCTION D'UN NOM ENTRE (VERIFICATIONS A FAIRE ?)
+            $add = $db->exec('INSERT INTO promotion (id, nom) VALUES (NULL, BTS Z1)');
+            ?>"/>
         </div>
     </br>
     <hr>
@@ -33,18 +36,25 @@
     <div>
     <label for="PromotionDelete">Promotion </label>
                 <select name=" "  id=" " required>
-			    <?php $reponse = $db->query('SELECT * FROM promotion');
+                <?php 
+                // Liste déroulante des Promotions disponibles
+                $reponse = $db->query('SELECT * FROM promotion');
                               while ($donnees = $reponse->fetch())
-									{
+				{
 				?>
 				<option value="<?php echo $donnees['id']; ?>"> 
-					<?php echo $donnees['nom']; ?>
+				<?php echo $donnees['nom']; ?>
 				</option>
 				<?php } ?>
 		        </select>
         </br></br>   
         <div>
-            <input type="submit" value="Supprimer"/>
+            <input type="submit" value="Supprimer" onclick="<?php
+
+            // PARTIE A RE-ADAPTER PAR RAPPORT AUX AUTRES REQUETES
+            $delete = $db->query('DELETE * FROM promotion WHERE id=' . $donnees->quote($_GET['id']));
+            
+            ?>"/>
         </div>
         </br>
         <hr>
